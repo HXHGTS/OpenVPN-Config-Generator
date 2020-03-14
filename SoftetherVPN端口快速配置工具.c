@@ -4,22 +4,21 @@
 int main() {
 	FILE* conf;
 	char server_ip[48];
-	int port,port_start, port_end, port_gap;
+	int port,port_start, i, port_gap;
 	printf("输入服务器地址：");
 	scanf("%s", server_ip);
 	printf("输入开始端口：");
 	scanf("%d", &port_start);
-	printf("输入结束端口：");
-	scanf("%d",&port_end);
 	printf("输入端口间隔：");
 	scanf("%d", &port_gap);
 	conf = fopen("server.conf", "w");
-	for (port = port_start; port <= port_end; port = port + port_gap) {
+	for (i=0,port = port_start; i<64; port = port + port_gap,i++) {
 		fprintf(conf, "%d ",port);
 	}
 	fclose(conf);
 	conf = fopen("client.conf", "w");
-	for (port = port_start; port <= port_end; port = port + port_gap) {
+	fprintf(conf, "remote-random\n");
+	for (i=0,port = port_start; i<64; port = port + port_gap,i++) {
 		fprintf(conf, "remote %s %d\n", server_ip,port);
 	}
 	fprintf(conf, "\n");
