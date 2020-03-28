@@ -4,7 +4,7 @@
 
 char server_ip[25];
 int port_start,port_gap,port,i;
-FILE* server_config, * client_config, * server_cert,*client_cert, * client_key;
+FILE* server_config, * client_config, *settings,* server_cert,*client_cert, * client_key;
 
 
 int main() {
@@ -46,12 +46,30 @@ int UserInterface(){
 		client_key = fopen("save\\client.key", "w");
 		fclose(client_key);
 	}
+	if ((settings = fopen("save\\settings.ini", "r")) == NULL) {
+		settings = fopen("save\\settings.ini", "w");
+		fprintf(settings, "dev tun\n");
+		fprintf(settings, "proto udp\n");
+		fprintf(settings, "remote-random\n");
+		fprintf(settings, "cipher AES-128-CBC\n");
+		fprintf(settings, "auth SHA1\n");
+		fprintf(settings, "resolv-retry infinite\n");
+		fprintf(settings, "nobind\n");
+		fprintf(settings, "persist-key\n");
+		fprintf(settings, "persist-tun\n");
+		fprintf(settings, "client\n");
+		fprintf(settings, "verb 3\n");
+		fprintf(settings, "auth-user-pass\n");
+		fclose(settings);
+	}
 	printf("请在弹出窗口中导入服务器证书（可以从之前服务器配置文件中倒数第三串密码导入）. . .\n");
 	system("notepad save\\server.cert");
 	printf("请在弹出窗口中导入客户端证书（可以从之前服务器配置文件中倒数第二串密码导入）. . .\n");;
 	system("notepad save\\client.cert");
 	printf("请在弹出窗口中导入客户端私钥（可以从之前服务器配置文件中最后一串密码导入）. . .\n");
 	system("notepad save\\client.key");
+	printf("请在弹出窗口中自定义客户端配置（需要与服务器一致，不知道请不要修改！）. . .\n");
+	system("notepad save\\settings.ini");
 	printf("数据导入完成，正在生成配置文件. . .\n");
 	return 0;
 }
@@ -72,19 +90,9 @@ int server() {
 }
 
 int client() {
-	client_config = fopen("config\\client_config.ovpn", "w");
-	fprintf(client_config, "dev tun\n");
-	fprintf(client_config, "proto udp\n");
-	fprintf(client_config, "remote-random\n");
-	fprintf(client_config, "cipher AES-128-CBC\n");
-	fprintf(client_config, "auth SHA1\n");
-	fprintf(client_config, "resolv-retry infinite\n");
-	fprintf(client_config, "nobind\n");
-	fprintf(client_config, "persist-key\n");
-	fprintf(client_config, "persist-tun\n");
-	fprintf(client_config, "client\n");
-	fprintf(client_config, "verb 3\n");
-	fprintf(client_config, "auth-user-pass\n");
+	system("type save\\settings.ini>config\\client_config.ovpn");
+	client_config = fopen("config\\client_config.ovpn", "a");
+	fprintf(client_config, "\n\n");
 	for (i = 0, port = port_start; i < 64; port = port + port_gap, i++) {
 		if (port <= 65535)fprintf(client_config, "remote %s %d\n", server_ip,port);
 		else {
