@@ -34,12 +34,12 @@ int UserInterface(){
 		printf("起始端口号输入不合法！\n");
 		goto Input;
 	}
-	if ((server_cert = fopen("save\\server.cert", "r")) == NULL) {
-		server_cert = fopen("save\\server.cert", "w");
+	if ((server_cert = fopen("save\\server.cer", "r")) == NULL) {
+		server_cert = fopen("save\\server.cer", "w");
 		fclose(server_cert);
 	}
-	if ((client_cert = fopen("save\\client.cert", "r")) == NULL) {
-		client_cert = fopen("save\\client.cert", "w");
+	if ((client_cert = fopen("save\\client.cer", "r")) == NULL) {
+		client_cert = fopen("save\\client.cer", "w");
 		fclose(client_cert);
 	}
 	if ((client_key = fopen("save\\client.key", "r")) == NULL) {
@@ -63,9 +63,9 @@ int UserInterface(){
 		fclose(settings);
 	}
 	printf("请在弹出窗口中导入服务器证书（可以从之前服务器配置文件中倒数第三串密码导入）. . .\n");
-	system("notepad save\\server.cert");
+	system("notepad save\\server.cer");
 	printf("请在弹出窗口中导入客户端证书（可以从之前服务器配置文件中倒数第二串密码导入）. . .\n");;
-	system("notepad save\\client.cert");
+	system("notepad save\\client.cer");
 	printf("请在弹出窗口中导入客户端私钥（可以从之前服务器配置文件中最后一串密码导入）. . .\n");
 	system("notepad save\\client.key");
 	printf("请在弹出窗口中自定义客户端配置（需要与服务器一致，不知道请不要修改！）. . .\n");
@@ -105,11 +105,11 @@ int client() {
 	client_config = fopen("config\\client_config.ovpn", "a");
 	fprintf(client_config, "\n\n");
 	fclose(client_config);
-	system("type save\\server.cert>>config\\client_config.ovpn");
+	system("type save\\server.cer>>config\\client_config.ovpn");
 	client_config = fopen("config\\client_config.ovpn", "a");
 	fprintf(client_config, "\n\n");
 	fclose(client_config);
-	system("type save\\client.cert>>config\\client_config.ovpn");
+	system("type save\\client.cer>>config\\client_config.ovpn");
 	client_config = fopen("config\\client_config.ovpn", "a");
 	fprintf(client_config, "\n\n");
 	fclose(client_config);
