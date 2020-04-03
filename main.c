@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<io.h>
 
-char server_ip[25];
+char server_ip[25],ovpn_name[100],command[151];
 int port_start,port_gap,port,i;
 FILE* server_config, * client_config, *settings,* server_cert,*client_cert, * client_key;
 
@@ -28,12 +28,15 @@ int UserInterface(){
 	scanf("%s", server_ip);
 	Input:printf("请输入起始端口号：\n");
 	scanf("%d", &port_start);
-	printf("请输入端口号间隔：\n");
-	scanf("%d", &port_gap);
 	if (port_start < 10000 || port_start>65535) {
 		printf("起始端口号输入不合法！\n");
 		goto Input;
 	}
+	printf("请输入端口号间隔：\n");
+	scanf("%d", &port_gap);
+	printf("请输入OpenVPN配置文件名称：\n");
+	scanf("%s", ovpn_name);
+	sprintf(command, "copy \"config\\client_config.ovpn\" \"config\\%s.ovpn\"",ovpn_name);
 	if ((server_cert = fopen("save\\server.cer", "r")) == NULL) {
 		server_cert = fopen("save\\server.cer", "w");
 		fclose(server_cert);
@@ -53,13 +56,14 @@ int UserInterface(){
 		fprintf(settings, "remote-random\n");
 		fprintf(settings, "cipher AES-128-CBC\n");
 		fprintf(settings, "auth SHA1\n");
-		fprintf(settings, "resolv-retry infinite\n");
+		fprintf(settings, "resolv-retry 60\n");
 		fprintf(settings, "nobind\n");
 		fprintf(settings, "persist-key\n");
 		fprintf(settings, "persist-tun\n");
 		fprintf(settings, "client\n");
 		fprintf(settings, "verb 3\n");
 		fprintf(settings, "auth-user-pass\n");
+		fprintf(settings, "keepalive 10 60\n");
 		fclose(settings);
 	}
 	printf("请在弹出窗口中导入服务器证书（可以从之前服务器配置文件中倒数第三串密码导入）. . .\n");
@@ -117,6 +121,7 @@ int client() {
 	client_config = fopen("config\\client_config.ovpn", "a");
 	fprintf(client_config, "\n\n");
 	fclose(client_config);
+	system(command);
 	printf("客户端端配置文件已生成！\n");
 	return 0;
 }
