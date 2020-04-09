@@ -64,6 +64,7 @@ int UserInterface(){
 		fprintf(settings, "verb 3\n");
 		fprintf(settings, "auth-user-pass\n");
 		fprintf(settings, "keepalive 10 60\n");
+		fprintf(settings, "block-outside-dns\n");
 		fclose(settings);
 	}
 	printf("请在弹出窗口中导入服务器证书（可以从之前服务器配置文件中倒数第三串密码导入）. . .\n");
