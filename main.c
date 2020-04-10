@@ -63,8 +63,10 @@ int UserInterface(){
 		fprintf(settings, "client\n");
 		fprintf(settings, "verb 3\n");
 		fprintf(settings, "auth-user-pass\n");
-		fprintf(settings, "keepalive 10 60\n");
+		fprintf(settings, "keepalive 5 10\n");
 		fprintf(settings, "block-outside-dns\n");
+		fprintf(settings, "connect-retry 2\n");
+		fprintf(settings, "fast-io\n");;
 		fclose(settings);
 	}
 	printf("请在弹出窗口中导入服务器证书（可以从之前服务器配置文件中倒数第三串密码导入）. . .\n");
@@ -123,6 +125,7 @@ int client() {
 	fprintf(client_config, "\n\n");
 	fclose(client_config);
 	system(command);
+	system("del config\\client_config.ovpn");
 	printf("客户端端配置文件已生成！\n");
 	return 0;
 }
