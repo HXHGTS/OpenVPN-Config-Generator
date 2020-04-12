@@ -65,7 +65,7 @@ int UserInterface(){
 		fprintf(settings, "auth-user-pass\n");
 		fprintf(settings, "keepalive 5 10\n");
 		fprintf(settings, "block-outside-dns\n");
-		fprintf(settings, "connect-retry 2\n");
+		fprintf(settings, "connect-retry 1\n");
 		fprintf(settings, "fast-io\n");;
 		fclose(settings);
 	}
