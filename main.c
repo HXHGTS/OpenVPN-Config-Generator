@@ -24,17 +24,17 @@ int UserInterface(){
 	if (access("save", 0)) {
 		system("mkdir save");
 	}
-	printf("ÇëÊäÈë·şÎñÆ÷ÓòÃû»òipµØÖ·£º\n");
+	printf("è¯·è¾“å…¥æœåŠ¡å™¨åŸŸåæˆ–ipåœ°å€ï¼š\n");
 	scanf("%s", server_ip);
-	Input:printf("ÇëÊäÈëÆğÊ¼¶Ë¿ÚºÅ£º\n");
+	Input:printf("è¯·è¾“å…¥èµ·å§‹ç«¯å£å·ï¼š\n");
 	scanf("%d", &port_start);
 	if (port_start < 10000 || port_start>65535) {
-		printf("ÆğÊ¼¶Ë¿ÚºÅÊäÈë²»ºÏ·¨£¡\n");
+		printf("èµ·å§‹ç«¯å£å·è¾“å…¥ä¸åˆæ³•ï¼\n");
 		goto Input;
 	}
-	printf("ÇëÊäÈë¶Ë¿ÚºÅ¼ä¸ô£º\n");
+	printf("è¯·è¾“å…¥ç«¯å£å·é—´éš”ï¼š\n");
 	scanf("%d", &port_gap);
-	printf("ÇëÊäÈëOpenVPNÅäÖÃÎÄ¼şÃû³Æ£º\n");
+	printf("è¯·è¾“å…¥OpenVPNé…ç½®æ–‡ä»¶åç§°ï¼š\n");
 	scanf("%s", ovpn_name);
 	sprintf(command, "copy \"config\\client_config.ovpn\" \"config\\%s.ovpn\"",ovpn_name);
 	if ((server_cert = fopen("save\\server.cer", "r")) == NULL) {
@@ -65,19 +65,19 @@ int UserInterface(){
 		fprintf(settings, "auth-user-pass\n");
 		fprintf(settings, "keepalive 5 10\n");
 		fprintf(settings, "block-outside-dns\n");
-		fprintf(settings, "connect-retry 1\n");
+		fprintf(settings, "connect-retry 0\n");
 		fprintf(settings, "fast-io\n");;
 		fclose(settings);
 	}
-	printf("ÇëÔÚµ¯³ö´°¿ÚÖĞµ¼Èë·şÎñÆ÷Ö¤Êé£¨¿ÉÒÔ´ÓÖ®Ç°·şÎñÆ÷ÅäÖÃÎÄ¼şÖĞµ¹ÊıµÚÈı´®ÃÜÂëµ¼Èë£©. . .\n");
+	printf("è¯·åœ¨å¼¹å‡ºçª—å£ä¸­å¯¼å…¥æœåŠ¡å™¨è¯ä¹¦ï¼ˆå¯ä»¥ä»ä¹‹å‰æœåŠ¡å™¨é…ç½®æ–‡ä»¶ä¸­å€’æ•°ç¬¬ä¸‰ä¸²å¯†ç å¯¼å…¥ï¼‰. . .\n");
 	system("notepad save\\server.cer");
-	printf("ÇëÔÚµ¯³ö´°¿ÚÖĞµ¼Èë¿Í»§¶ËÖ¤Êé£¨¿ÉÒÔ´ÓÖ®Ç°·şÎñÆ÷ÅäÖÃÎÄ¼şÖĞµ¹ÊıµÚ¶ş´®ÃÜÂëµ¼Èë£©. . .\n");;
+	printf("è¯·åœ¨å¼¹å‡ºçª—å£ä¸­å¯¼å…¥å®¢æˆ·ç«¯è¯ä¹¦ï¼ˆå¯ä»¥ä»ä¹‹å‰æœåŠ¡å™¨é…ç½®æ–‡ä»¶ä¸­å€’æ•°ç¬¬äºŒä¸²å¯†ç å¯¼å…¥ï¼‰. . .\n");;
 	system("notepad save\\client.cer");
-	printf("ÇëÔÚµ¯³ö´°¿ÚÖĞµ¼Èë¿Í»§¶ËË½Ô¿£¨¿ÉÒÔ´ÓÖ®Ç°·şÎñÆ÷ÅäÖÃÎÄ¼şÖĞ×îºóÒ»´®ÃÜÂëµ¼Èë£©. . .\n");
+	printf("è¯·åœ¨å¼¹å‡ºçª—å£ä¸­å¯¼å…¥å®¢æˆ·ç«¯ç§é’¥ï¼ˆå¯ä»¥ä»ä¹‹å‰æœåŠ¡å™¨é…ç½®æ–‡ä»¶ä¸­æœ€åä¸€ä¸²å¯†ç å¯¼å…¥ï¼‰. . .\n");
 	system("notepad save\\client.key");
-	printf("ÇëÔÚµ¯³ö´°¿ÚÖĞ×Ô¶¨Òå¿Í»§¶ËÅäÖÃ£¨ĞèÒªÓë·şÎñÆ÷Ò»ÖÂ£¬²»ÖªµÀÇë²»ÒªĞŞ¸Ä£¡£©. . .\n");
+	printf("è¯·åœ¨å¼¹å‡ºçª—å£ä¸­è‡ªå®šä¹‰å®¢æˆ·ç«¯é…ç½®ï¼ˆéœ€è¦ä¸æœåŠ¡å™¨ä¸€è‡´ï¼Œä¸çŸ¥é“è¯·ä¸è¦ä¿®æ”¹ï¼ï¼‰. . .\n");
 	system("notepad save\\settings.ini");
-	printf("Êı¾İµ¼ÈëÍê³É£¬ÕıÔÚÉú³ÉÅäÖÃÎÄ¼ş. . .\n");
+	printf("æ•°æ®å¯¼å…¥å®Œæˆï¼Œæ­£åœ¨ç”Ÿæˆé…ç½®æ–‡ä»¶. . .\n");
 	return 0;
 }
 
@@ -86,13 +86,13 @@ int server() {
 	for (i = 0, port = port_start; i < 64; port = port + port_gap, i++) {
 		if (port <= 65535)fprintf(server_config, "%d,", port);
 		else {
-			printf("ÓÉÓÚ¶Ë¿ÚºÅ´óĞ¡Òç³ö£¬×Ô¶¯È¡×îĞ¡Öµ10001£¡\n");
+			printf("ç”±äºç«¯å£å·å¤§å°æº¢å‡ºï¼Œè‡ªåŠ¨å–æœ€å°å€¼10001ï¼\n");
 			port = 10001;
 			i = i - 1;
 		}
 	}
 	fclose(server_config);
-	printf("·şÎñÆ÷¶ËÅäÖÃÎÄ¼şÒÑÉú³É£¡\n");
+	printf("æœåŠ¡å™¨ç«¯é…ç½®æ–‡ä»¶å·²ç”Ÿæˆï¼\n");
 	return 0;
 }
 
@@ -103,7 +103,7 @@ int client() {
 	for (i = 0, port = port_start; i < 64; port = port + port_gap, i++) {
 		if (port <= 65535)fprintf(client_config, "remote %s %d\n", server_ip,port);
 		else {
-			printf("ÓÉÓÚ¶Ë¿ÚºÅ´óĞ¡Òç³ö£¬×Ô¶¯È¡×îĞ¡Öµ10001£¡\n");
+			printf("ç”±äºç«¯å£å·å¤§å°æº¢å‡ºï¼Œè‡ªåŠ¨å–æœ€å°å€¼10001ï¼\n");
 			port = 10001;
 			i = i - 1;
 		}
@@ -126,6 +126,6 @@ int client() {
 	fclose(client_config);
 	system(command);
 	system("del config\\client_config.ovpn");
-	printf("¿Í»§¶Ë¶ËÅäÖÃÎÄ¼şÒÑÉú³É£¡\n");
+	printf("å®¢æˆ·ç«¯ç«¯é…ç½®æ–‡ä»¶å·²ç”Ÿæˆï¼\n");
 	return 0;
 }
