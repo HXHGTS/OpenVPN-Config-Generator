@@ -1,9 +1,6 @@
 # OpenVPN-Config-Generator
 
-Softether服务器端OpenVPN项端口自动生成与对应客户端OpenVPN配置快速生成，便于修改
+本软件可用于OpenVPN客户端配置与SoftEther服务端配置的快速生成，便于修改（未来考虑加入OpenVPN官方服务器端配置文件生成）
 
-下载地址（64位系统）：https://gitee.com/hxhgts/OpenVPN-Config-Generator/raw/master/OpenVPN%E9%85%8D%E7%BD%AE%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7x64.exe
-
-下载地址（32位系统）：https://gitee.com/hxhgts/OpenVPN-Config-Generator/raw/master/OpenVPN%E9%85%8D%E7%BD%AE%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7x86.exe
 
 
